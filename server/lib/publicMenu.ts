@@ -1,4 +1,4 @@
-import type { CategoryWithItems, MenuItemSeed, MenuPayload, Restaurant, Surface } from "../../src/types/menu.ts";
+import type { CategoryWithItems, MenuItemSeed, MenuPayload, Restaurant, Surface } from "../../src/types/menu.js";
 
 export type PublicItem = MenuItemSeed;
 export type PublicCategory = CategoryWithItems;

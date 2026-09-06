@@ -1,14 +1,14 @@
 import { Hono } from "hono";
 import { and, eq } from "drizzle-orm";
-import { getDb } from "../../db/client.ts";
-import { media } from "../../db/schema.ts";
-import { jsonError, HttpError } from "../lib/errors.ts";
-import { newId } from "../lib/ids.ts";
-import { ALLOWED_MIME, MAX_UPLOAD_BYTES, optimizeImage, sniffMime } from "../lib/images.ts";
-import { deleteObject, putObject, readLocalObject } from "../lib/storage.ts";
-import { bumpMenuRevision, NO_STORE } from "../lib/cache.ts";
-import { requireAuth, type AppEnv } from "../middleware/requireAuth.ts";
-import { idParam } from "../schemas.ts";
+import { getDb } from "../../db/client.js";
+import { media } from "../../db/schema.js";
+import { jsonError, HttpError } from "../lib/errors.js";
+import { newId } from "../lib/ids.js";
+import { ALLOWED_MIME, MAX_UPLOAD_BYTES, optimizeImage, sniffMime } from "../lib/images.js";
+import { deleteObject, putObject, readLocalObject } from "../lib/storage.js";
+import { bumpMenuRevision, NO_STORE } from "../lib/cache.js";
+import { requireAuth, type AppEnv } from "../middleware/requireAuth.js";
+import { idParam } from "../schemas.js";
 
 const KIND = new Set(["dish", "category", "logo"]);
 

@@ -1,15 +1,15 @@
 import { Hono } from "hono";
 import { cors } from "hono/cors";
 import { z } from "zod";
-import { getMenuRevision, PUBLIC_CACHE } from "./lib/cache.ts";
-import { loadPublicMenu, loadPublicSettings } from "./lib/loadMenu.ts";
-import { jsonError } from "./lib/errors.ts";
-import { authRoutes } from "./routes/auth.ts";
-import { categoryRoutes } from "./routes/categories.ts";
-import { itemRoutes } from "./routes/items.ts";
-import { mediaRoutes } from "./routes/media.ts";
-import { settingsRoutes } from "./routes/settings.ts";
-import { adminRoutes } from "./routes/admin.ts";
+import { getMenuRevision, PUBLIC_CACHE } from "./lib/cache.js";
+import { loadPublicMenu, loadPublicSettings } from "./lib/loadMenu.js";
+import { jsonError } from "./lib/errors.js";
+import { authRoutes } from "./routes/auth.js";
+import { categoryRoutes } from "./routes/categories.js";
+import { itemRoutes } from "./routes/items.js";
+import { mediaRoutes } from "./routes/media.js";
+import { settingsRoutes } from "./routes/settings.js";
+import { adminRoutes } from "./routes/admin.js";
 
 const idParam = z.object({ id: z.string().min(1).max(80) });
 

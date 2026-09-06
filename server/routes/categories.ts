@@ -1,13 +1,13 @@
 import { Hono } from "hono";
 import { and, asc, count, eq } from "drizzle-orm";
-import { getDb } from "../../db/client.ts";
-import { categories, menuItems } from "../../db/schema.ts";
-import { categoryDeleteSchema, categoryWriteSchema, idParam, reorderSchema } from "../schemas.ts";
-import { jsonError, HttpError } from "../lib/errors.ts";
-import { newId, slugify } from "../lib/ids.ts";
-import { bumpMenuRevision, NO_STORE } from "../lib/cache.ts";
-import { categoryFlags } from "../lib/contentFlags.ts";
-import { requireAuth, type AppEnv } from "../middleware/requireAuth.ts";
+import { getDb } from "../../db/client.js";
+import { categories, menuItems } from "../../db/schema.js";
+import { categoryDeleteSchema, categoryWriteSchema, idParam, reorderSchema } from "../schemas.js";
+import { jsonError, HttpError } from "../lib/errors.js";
+import { newId, slugify } from "../lib/ids.js";
+import { bumpMenuRevision, NO_STORE } from "../lib/cache.js";
+import { categoryFlags } from "../lib/contentFlags.js";
+import { requireAuth, type AppEnv } from "../middleware/requireAuth.js";
 
 export const categoryRoutes = new Hono<AppEnv>();
 

@@ -1,9 +1,9 @@
 import { describe, expect, it } from "vitest";
-import { hashPassword, verifyPassword, assertPasswordStrength } from "./password.ts";
-import { slugify, isSafeStorageKey } from "./ids.ts";
-import { assembleMenu, isLiveItem, isLiveCategory } from "./publicMenu.ts";
-import { itemFlags } from "./contentFlags.ts";
-import { itemWriteSchema, loginSchema, reorderSchema, bulkItemsSchema } from "../schemas.ts";
+import { hashPassword, verifyPassword, assertPasswordStrength } from "./password.js";
+import { slugify, isSafeStorageKey } from "./ids.js";
+import { assembleMenu, isLiveItem, isLiveCategory } from "./publicMenu.js";
+import { itemFlags } from "./contentFlags.js";
+import { itemWriteSchema, loginSchema, reorderSchema, bulkItemsSchema } from "../schemas.js";
 
 describe("password", () => {
   it("hashes and verifies", async () => {

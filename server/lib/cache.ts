@@ -1,6 +1,6 @@
 import { eq } from "drizzle-orm";
-import { getDb } from "../../db/client.ts";
-import { settings } from "../../db/schema.ts";
+import { getDb } from "../../db/client.js";
+import { settings } from "../../db/schema.js";
 
 const KEY = "menu_revision";
 

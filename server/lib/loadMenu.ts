@@ -1,9 +1,9 @@
 import { and, asc, eq } from "drizzle-orm";
-import { getDb } from "../../db/client.ts";
-import { categories, menuItems, restaurants, settings } from "../../db/schema.ts";
-import { buildMenuPayload } from "../../src/data/menu.seed.ts";
-import { assembleMenu, toPublicRestaurant } from "./publicMenu.ts";
-import type { MenuPayload } from "../../src/types/menu.ts";
+import { getDb } from "../../db/client.js";
+import { categories, menuItems, restaurants, settings } from "../../db/schema.js";
+import { buildMenuPayload } from "../../src/data/menu.seed.js";
+import { assembleMenu, toPublicRestaurant } from "./publicMenu.js";
+import type { MenuPayload } from "../../src/types/menu.js";
 
 export async function loadRestaurantMenu(restaurantId: string, mode: "live" | "preview"): Promise<MenuPayload> {
   const db = getDb();

@@ -1,7 +1,7 @@
 import { Hono } from "hono";
 import { asc, eq, inArray } from "drizzle-orm";
-import { getDb } from "../../db/client.ts";
-import { categories, menuItems } from "../../db/schema.ts";
+import { getDb } from "../../db/client.js";
+import { categories, menuItems } from "../../db/schema.js";
 import {
   availabilitySchema,
   bulkItemsSchema,
@@ -9,13 +9,13 @@ import {
   itemQuerySchema,
   itemWriteSchema,
   reorderSchema,
-} from "../schemas.ts";
-import { jsonError, HttpError } from "../lib/errors.ts";
-import { newId } from "../lib/ids.ts";
-import { bumpMenuRevision, NO_STORE } from "../lib/cache.ts";
-import { itemFlags } from "../lib/contentFlags.ts";
-import { requireAuth, type AppEnv } from "../middleware/requireAuth.ts";
-import { assertCategoryInRestaurant } from "../lib/loadMenu.ts";
+} from "../schemas.js";
+import { jsonError, HttpError } from "../lib/errors.js";
+import { newId } from "../lib/ids.js";
+import { bumpMenuRevision, NO_STORE } from "../lib/cache.js";
+import { itemFlags } from "../lib/contentFlags.js";
+import { requireAuth, type AppEnv } from "../middleware/requireAuth.js";
+import { assertCategoryInRestaurant } from "../lib/loadMenu.js";
 
 export const itemRoutes = new Hono<AppEnv>();
 

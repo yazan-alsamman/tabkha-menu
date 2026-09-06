@@ -1,10 +1,10 @@
 import { Hono } from "hono";
 import { eq, inArray } from "drizzle-orm";
-import { getDb } from "../../db/client.ts";
-import { categories, menuItems } from "../../db/schema.ts";
-import { loadRestaurantMenu } from "../lib/loadMenu.ts";
-import { NO_STORE } from "../lib/cache.ts";
-import { requireAuth, type AppEnv } from "../middleware/requireAuth.ts";
+import { getDb } from "../../db/client.js";
+import { categories, menuItems } from "../../db/schema.js";
+import { loadRestaurantMenu } from "../lib/loadMenu.js";
+import { NO_STORE } from "../lib/cache.js";
+import { requireAuth, type AppEnv } from "../middleware/requireAuth.js";
 
 export const adminRoutes = new Hono<AppEnv>();
 

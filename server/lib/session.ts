@@ -2,8 +2,8 @@ import { createHash, randomBytes } from "node:crypto";
 import { deleteCookie, getCookie, setCookie } from "hono/cookie";
 import type { Context } from "hono";
 import { eq } from "drizzle-orm";
-import { getDb } from "../../db/client.ts";
-import { restaurantUsers, sessions, users } from "../../db/schema.ts";
+import { getDb } from "../../db/client.js";
+import { restaurantUsers, sessions, users } from "../../db/schema.js";
 
 export const SESSION_COOKIE = "tabkha_session";
 const SESSION_DAYS = 7;

@@ -1,0 +1,9 @@
+node_modules
+dist
+.analysis
+uploads
+.git
+*.pdf
+.env
+.env.*
+!.env.example

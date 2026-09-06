@@ -1,12 +1,12 @@
 import { Hono } from "hono";
 import { eq } from "drizzle-orm";
-import { getDb } from "../../db/client.ts";
-import { restaurantUsers, users } from "../../db/schema.ts";
-import { loginSchema } from "../schemas.ts";
-import { jsonError, HttpError } from "../lib/errors.ts";
-import { verifyPassword } from "../lib/password.ts";
-import { createSession, destroySession, readAuth, writeSessionCookie } from "../lib/session.ts";
-import { NO_STORE } from "../lib/cache.ts";
+import { getDb } from "../../db/client.js";
+import { restaurantUsers, users } from "../../db/schema.js";
+import { loginSchema } from "../schemas.js";
+import { jsonError, HttpError } from "../lib/errors.js";
+import { verifyPassword } from "../lib/password.js";
+import { createSession, destroySession, readAuth, writeSessionCookie } from "../lib/session.js";
+import { NO_STORE } from "../lib/cache.js";
 
 export const authRoutes = new Hono();
 

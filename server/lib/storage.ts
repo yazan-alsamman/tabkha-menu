@@ -1,6 +1,6 @@
 import { mkdir, readFile, unlink, writeFile } from "node:fs/promises";
 import path from "node:path";
-import { isSafeStorageKey } from "./ids.ts";
+import { isSafeStorageKey } from "./ids.js";
 
 const UPLOAD_DIR = path.resolve(process.env.UPLOAD_DIR ?? "uploads");
 

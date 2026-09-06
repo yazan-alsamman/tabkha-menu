@@ -1,12 +1,12 @@
 import { writeFileSync } from "node:fs";
 import { resolve } from "node:path";
-import { eq } from "drizzle-orm";
-import { getDb } from "./client.ts";
-import { categories, menuItems, restaurantUsers, restaurants, settings, users } from "./schema.ts";
-import { items, restaurant, categories as categorySeed } from "../src/data/menu.seed.ts";
-import { hashPassword, assertPasswordStrength } from "../api/lib/password.ts";
-import { newId } from "../api/lib/ids.ts";
-import { loadRestaurantMenu } from "../api/lib/loadMenu.ts";
+import { and, eq } from "drizzle-orm";
+import { getDb } from "./client.js";
+import { categories, menuItems, restaurantUsers, restaurants, sessions, settings, users } from "./schema.js";
+import { items, restaurant, categories as categorySeed } from "../src/data/menu.seed.js";
+import { hashPassword, assertPasswordStrength } from "../server/lib/password.js";
+import { newId } from "../server/lib/ids.js";
+import { loadRestaurantMenu } from "../server/lib/loadMenu.js";
 
 async function seed() {
   const db = getDb();
@@ -105,17 +105,52 @@ async function seedAdmin(restaurantId: string) {
     throw new Error(weak);
   }
   const db = getDb();
-  const [existing] = await db.select().from(users).where(eq(users.email, email)).limit(1);
-  if (existing) {
-    console.log(`Admin user already exists: ${email}`);
+  const passwordHash = await hashPassword(password);
+  const name = process.env.ADMIN_NAME?.trim() || "Tabkha";
+
+  const [byEmail] = await db.select().from(users).where(eq(users.email, email)).limit(1);
+  if (byEmail) {
+    await db.update(users).set({ passwordHash, name }).where(eq(users.id, byEmail.id));
+    const [link] = await db
+      .select()
+      .from(restaurantUsers)
+      .where(and(eq(restaurantUsers.userId, byEmail.id), eq(restaurantUsers.restaurantId, restaurantId)))
+      .limit(1);
+    if (!link) {
+      await db.insert(restaurantUsers).values({
+        id: newId("ru"),
+        userId: byEmail.id,
+        restaurantId,
+        role: "owner",
+      });
+    }
+    await db.delete(sessions).where(eq(sessions.userId, byEmail.id));
+    console.log(`Updated admin user ${email}`);
     return;
   }
+
+  const [membership] = await db
+    .select()
+    .from(restaurantUsers)
+    .where(eq(restaurantUsers.restaurantId, restaurantId))
+    .limit(1);
+
+  if (membership) {
+    await db
+      .update(users)
+      .set({ email, passwordHash, name })
+      .where(eq(users.id, membership.userId));
+    await db.delete(sessions).where(eq(sessions.userId, membership.userId));
+    console.log(`Updated admin user ${email}`);
+    return;
+  }
+
   const userId = newId("user");
   await db.insert(users).values({
     id: userId,
     email,
-    passwordHash: await hashPassword(password),
-    name: process.env.ADMIN_NAME?.trim() || "Tabkha",
+    passwordHash,
+    name,
   });
   await db.insert(restaurantUsers).values({
     id: newId("ru"),

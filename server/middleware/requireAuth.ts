@@ -1,6 +1,6 @@
 import type { Context, Next } from "hono";
-import { HttpError, jsonError } from "../lib/errors.ts";
-import { readAuth, type AuthContext } from "../lib/session.ts";
+import { HttpError, jsonError } from "../lib/errors.js";
+import { readAuth, type AuthContext } from "../lib/session.js";
 
 export type AppEnv = {
   Variables: {

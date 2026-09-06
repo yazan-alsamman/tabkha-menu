@@ -1,4 +1,4 @@
-import type { CategorySeed, MenuItemSeed, Restaurant } from "../types/menu";
+import type { CategorySeed, MenuItemSeed, Restaurant } from "../types/menu.js";
 
 export const restaurant: Restaurant = {
   id: "tabkha-and-more",

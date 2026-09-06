@@ -1,11 +1,11 @@
 import { Hono } from "hono";
 import { eq, and } from "drizzle-orm";
-import { getDb } from "../../db/client.ts";
-import { restaurants, settings } from "../../db/schema.ts";
-import { settingsWriteSchema } from "../schemas.ts";
-import { jsonError, HttpError } from "../lib/errors.ts";
-import { bumpMenuRevision, NO_STORE } from "../lib/cache.ts";
-import { requireAuth, type AppEnv } from "../middleware/requireAuth.ts";
+import { getDb } from "../../db/client.js";
+import { restaurants, settings } from "../../db/schema.js";
+import { settingsWriteSchema } from "../schemas.js";
+import { jsonError, HttpError } from "../lib/errors.js";
+import { bumpMenuRevision, NO_STORE } from "../lib/cache.js";
+import { requireAuth, type AppEnv } from "../middleware/requireAuth.js";
 
 export const settingsRoutes = new Hono<AppEnv>();
 

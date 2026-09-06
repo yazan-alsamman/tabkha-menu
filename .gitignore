@@ -6,9 +6,13 @@ dist
 dist-ssr
 *.local
 
+# Vercel
+.vercel
+
 # Environment
 .env
-.env.*.local
+.env.*
+!.env.example
 
 # Local media uploads (production uses Vercel Blob)
 uploads
