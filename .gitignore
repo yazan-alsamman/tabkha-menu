@@ -1,0 +1,48 @@
+# Dependencies
+node_modules
+
+# Build
+dist
+dist-ssr
+*.local
+
+# Environment
+.env
+.env.*.local
+
+# Local media uploads (production uses Vercel Blob)
+uploads
+
+# Logs
+logs
+*.log
+npm-debug.log*
+pnpm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Editor
+.vscode/*
+!.vscode/extensions.json
+.idea
+.DS_Store
+Thumbs.db
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# Local print sources (too large for GitHub HTTP; keep on disk)
+referenses/tabkha & more.pdf
+referenses/Tabkha and More.pdf
+
+# Working analysis (rendered PDF crops, not source of truth)
+.analysis
+
+# Drizzle kit
+drizzle/*.sql
+drizzle/meta
+
+# OS
+desktop.ini

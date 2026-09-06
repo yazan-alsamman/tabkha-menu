@@ -1,0 +1,173 @@
+@import "tailwindcss";
+
+@import "@fontsource/montserrat/200.css";
+@import "@fontsource/montserrat/300.css";
+@import "@fontsource/montserrat/500.css";
+@import "@fontsource/cairo/300.css";
+@import "@fontsource/cairo/400.css";
+@import "@fontsource/cairo/600.css";
+
+@theme {
+  --color-forest: #233025;
+  --color-forest-deep: #1a241c;
+  --color-cream: #eddfce;
+  --color-cream-warm: #e8d9c5;
+  --color-cream-soft: #ede4d6;
+  --color-terracotta: #9b6a51;
+  --color-sage: #959588;
+  --color-ink: #233025;
+  --color-paper: #eddfce;
+
+  --font-latin: "Montserrat", ui-sans-serif, system-ui, sans-serif;
+  --font-arabic: "Cairo", "Segoe UI", Tahoma, sans-serif;
+
+  --radius-none: 0;
+  --radius-sm: 2px;
+  --radius-md: 4px;
+  --radius-lg: 10px;
+  --radius-full: 999px;
+
+  --shadow-lift: 0 18px 40px -24px rgb(35 48 37 / 0.55);
+  --shadow-sheet: 0 -24px 60px -20px rgb(35 48 37 / 0.45);
+
+  --ease-premium: cubic-bezier(0.16, 1, 0.3, 1);
+  --duration-fast: 180ms;
+  --duration-base: 420ms;
+  --duration-slow: 780ms;
+
+  --z-rail: 40;
+  --z-overlay: 50;
+  --z-sheet: 60;
+  --z-loader: 70;
+
+  --breakpoint-xs: 22rem;
+}
+
+@layer base {
+  :root {
+    color-scheme: dark;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    scroll-padding-top: calc(7.25rem + env(safe-area-inset-top));
+    scroll-padding-bottom: 0.5rem;
+  }
+
+  @media (min-width: 768px) {
+    html {
+      scroll-padding-bottom: 0.5rem;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+
+  body {
+    margin: 0;
+    min-height: 100dvh;
+    overflow-x: hidden;
+    overflow-anchor: none;
+    background: var(--color-forest);
+    color: var(--color-cream);
+    font-family: var(--font-latin);
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    text-size-adjust: 100%;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  .skip-link {
+    position: absolute;
+    inset-inline-start: max(1rem, env(safe-area-inset-left));
+    top: max(0.75rem, env(safe-area-inset-top));
+    z-index: 80;
+    transform: translateY(-180%);
+    background: var(--color-cream);
+    color: var(--color-forest);
+    padding: 0.65rem 1rem;
+    font-size: 0.9rem;
+  }
+
+  .skip-link:focus {
+    transform: none;
+  }
+
+  .screen-gutter {
+    padding-left: max(clamp(1rem, 4vw, 3.5rem), env(safe-area-inset-left));
+    padding-right: max(clamp(1rem, 4vw, 3.5rem), env(safe-area-inset-right));
+  }
+
+  html[lang="ar"] body,
+  html[dir="rtl"] .font-copy,
+  html[lang="ar"] .admin-root {
+    font-family: var(--font-arabic);
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-terracotta);
+    outline-offset: 3px;
+  }
+
+  button {
+    font: inherit;
+    cursor: pointer;
+  }
+
+  img {
+    max-width: 100%;
+    height: auto;
+  }
+}
+
+@keyframes atmosphere-sheen {
+  0% {
+    transform: translate3d(-30%, 0, 0);
+  }
+  100% {
+    transform: translate3d(30%, 0, 0);
+  }
+}
+
+@layer utilities {
+  .atmosphere-sheen {
+    background: linear-gradient(
+      105deg,
+      transparent 20%,
+      rgb(155 106 81 / 0.18) 50%,
+      transparent 80%
+    );
+    animation: atmosphere-sheen 7.5s ease-in-out infinite alternate;
+  }
+
+  /* Phone landscape is wide but short — keep the stacked QR layout. */
+  @media (min-width: 768px) and (min-height: 640px) {
+    .layout-split {
+      grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+    }
+  }
+
+  @media (min-width: 1024px) and (min-height: 640px) {
+    .layout-split {
+      grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr);
+    }
+  }
+
+  @media (min-width: 1280px) {
+    .layout-split {
+      grid-template-columns: minmax(16rem, 24rem) minmax(0, 1fr);
+    }
+  }
+}
