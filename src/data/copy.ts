@@ -21,6 +21,8 @@ export const copy = {
     scroll: "مرّر",
     skipToMenu: "انتقل إلى القائمة",
     draftPreview: "معاينة المسودة — ليست النسخة المنشورة للضيوف",
+    chooseCategory: "اختر قسماً",
+    back: "رجوع",
   },
   en: {
     langName: "English",
@@ -44,5 +46,7 @@ export const copy = {
     scroll: "Scroll",
     skipToMenu: "Skip to menu",
     draftPreview: "Draft preview — not the published guest menu",
+    chooseCategory: "Choose a section",
+    back: "Back",
   },
 } as const;

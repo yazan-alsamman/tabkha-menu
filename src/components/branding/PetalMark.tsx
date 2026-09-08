@@ -27,21 +27,22 @@ function MaskedAsset({
   );
 }
 
-/** Four-petal mark: rounded corners face out, star left as negative space. */
+/** Facade mark from `referenses/Restaurant Facade Logo2.pdf` (public/brand/petal-mark.svg). */
 export function PetalMark({ className = "size-16", title }: MarkProps) {
   return (
     <svg
-      viewBox="0 0 100 100"
-      className={`inline-block ${className}`}
+      viewBox="9977.96 2040.96 2154.31 2154.31"
+      className={`inline-block overflow-visible ${className}`}
       fill="currentColor"
       role={title ? "img" : "presentation"}
       aria-label={title}
       aria-hidden={title ? undefined : true}
     >
-      <path d="M12 50V20c0-8 6-14 14-14h24v28c0 9-7 16-16 16H12Z" />
-      <path d="M50 12h30c8 0 14 6 14 14v24H66c-9 0-16-7-16-16V12Z" />
-      <path d="M88 50v30c0 8-6 14-14 14H50V66c0-9 7-16 16-16h22Z" />
-      <path d="M50 88H20c-8 0-14-6-14-14V50h28c9 0 16 7 16 16v22Z" />
+      <path transform="matrix(10,0,0,-10,10448.556,3200.5723)" d="M0 0H.11C28.994 0 52.41-23.416 52.41-52.3V-52.319C52.41-78.359 31.3-99.469 5.259-99.469H-47.059V-47.059C-47.059-21.069-25.99 0 0 0" />
+      <path transform="matrix(10,0,0,-10,11137.579,3724.672)" d="M0 0V.11C0 28.994 23.416 52.41 52.3 52.41H52.319C78.359 52.41 99.469 31.3 99.469 5.259V-47.059H47.059C21.069-47.059 0-25.99 0 0" />
+      <path transform="matrix(10,0,0,-10,11661.68,3035.6485)" d="M0 0H-.008C-28.949 0-52.41 23.461-52.41 52.402V52.41C-52.41 78.4-31.341 99.469-5.351 99.469H47.059V47.059C47.059 21.069 25.99 0 0 0" />
+      <path transform="matrix(10,0,0,-10,10501.148,2040.9556)" d="M0 0C26.041 0 47.151-21.11 47.151-47.151V-47.169C47.151-76.054 23.735-99.469-5.15-99.469H-5.168C-31.208-99.469-52.319-78.359-52.319-52.319V0Z" />
+      <path transform="matrix(10,0,0,-10,11054.438,3410.2752)" d="M0 0V0C0 16.323-13.232 29.555-29.555 29.555-13.232 29.555 0 42.787 0 59.11 0 42.787 13.232 29.555 29.555 29.555 13.232 29.555 0 16.323 0 0" />
     </svg>
   );
 }
@@ -56,4 +57,9 @@ export function WordmarkLatin({ className = "h-6 w-56" }: { className?: string }
 
 export function TabkhaGlyph({ className = "h-16 w-24" }: { className?: string }) {
   return <MaskedAsset src="/brand/glyph-tabkha.svg" className={className} />;
+}
+
+/** Isolated ط from the facade wordmark طبخة. */
+export function TaaMark({ className = "h-16 w-12" }: { className?: string }) {
+  return <MaskedAsset src="/brand/glyph-taa.svg" className={className} />;
 }

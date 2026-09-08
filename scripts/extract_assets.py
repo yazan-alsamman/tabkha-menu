@@ -70,7 +70,7 @@ PATH_RE = re.compile(r"<path[^>]*?/>")
 TRANSLATE_RE = re.compile(r"matrix\([^)]*?,\s*([-\d.]+)\s*,\s*[-\d.]+\s*\)")
 
 
-def write_svg(page_svg: str, box: fitz.Rect, dest: Path, pad: float = 0.0) -> None:
+def write_svg(page_svg: str, box: fitz.Rect, dest: Path, pad: float = 0.0, fill_rule: str | None = None) -> None:
     """Emit one region of the artwork as a standalone SVG containing only its paths.
 
     Each path carries an absolute translate in page-point space, so a region can be
@@ -89,15 +89,45 @@ def write_svg(page_svg: str, box: fitz.Rect, dest: Path, pad: float = 0.0) -> No
         # Let the mark inherit colour so one file serves every brand surface.
         kept.append(path.replace('fill="#233025"', 'fill="currentColor"'))
 
+    rule = f' fill-rule="{fill_rule}"' if fill_rule else ""
     svg = (
         f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="{x0:.2f} {y0:.2f} '
-        f'{w:.2f} {h:.2f}" fill="currentColor" role="img" aria-hidden="true">'
+        f'{w:.2f} {h:.2f}" fill="currentColor"{rule} role="img" aria-hidden="true">'
         + "".join(kept)
         + "</svg>"
     )
     dest.parent.mkdir(parents=True, exist_ok=True)
     dest.write_text(svg, encoding="utf-8")
     print(f"  {dest.relative_to(ROOT)}  {len(kept)} paths  ({w:.0f}x{h:.0f})")
+
+
+FOREST = (35, 48, 37)
+CREAM = (237, 223, 206)
+
+
+def write_app_icons(page: fitz.Page, mark: fitz.Rect) -> None:
+    """Paint the facade mark onto forest squares for favicon / PWA icons."""
+    pix = page.get_pixmap(dpi=144, clip=mark)
+    src = Image.open(io.BytesIO(pix.tobytes("png"))).convert("RGB")
+    mask = src.convert("L").point(lambda p: 255 if p < 140 else 0)
+    out = Image.composite(Image.new("RGB", src.size, CREAM), Image.new("RGB", src.size, FOREST), mask)
+
+    inset = round(out.width * 0.1)
+    padded = Image.new("RGB", out.size, FOREST)
+    inner = out.resize((out.width - inset * 2, out.height - inset * 2), Image.LANCZOS)
+    padded.paste(inner, (inset, inset))
+
+    public = ROOT / "public"
+    sizes = {
+        "favicon-32.png": 32,
+        "apple-touch-icon.png": 180,
+        "icon-512.png": 512,
+    }
+    for name, size in sizes.items():
+        padded.resize((size, size), Image.LANCZOS).save(public / name, "PNG", optimize=True)
+        print(f"  public/{name}  {size}x{size}")
+    padded.resize((32, 32), Image.LANCZOS).save(public / "favicon.ico", sizes=[(32, 32)])
+    print("  public/favicon.ico")
 
 
 def extract_logo() -> None:
@@ -115,12 +145,16 @@ def extract_logo() -> None:
     )
     tabkha = arabic_words[-1]
     page_svg = page.get_svg_image()
-    doc.close()
 
     write_svg(page_svg, mark, BRAND_OUT / "petal-mark.svg")
     write_svg(page_svg, latin, BRAND_OUT / "wordmark-latin.svg")
     write_svg(page_svg, arabic, BRAND_OUT / "wordmark-ar.svg")
     write_svg(page_svg, tabkha, BRAND_OUT / "glyph-tabkha.svg")
+    # Isolated ط from طبخة — the identity letter used as a spinning orbit.
+    taa = fitz.Rect(tabkha.x0 + tabkha.width * 0.64, tabkha.y0 - 8, tabkha.x1 + 12, tabkha.y1 + 8)
+    write_svg(page_svg, taa, BRAND_OUT / "glyph-taa.svg", fill_rule="evenodd")
+    write_app_icons(page, mark)
+    doc.close()
 
 
 # Each category takes its hero from the photography already art-directed into the
