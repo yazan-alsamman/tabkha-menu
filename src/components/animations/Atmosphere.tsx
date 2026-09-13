@@ -17,7 +17,7 @@ export function Atmosphere({ tone }: { tone: "cream" | "forest" }) {
 
   return (
     <div
-      className={`pointer-events-none absolute inset-0 overflow-hidden ${color}`}
+      className={`pointer-events-none absolute inset-0 z-0 overflow-hidden ${color}`}
       aria-hidden
       style={{ perspective: "900px" }}
     >

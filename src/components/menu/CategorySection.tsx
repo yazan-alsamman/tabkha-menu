@@ -23,7 +23,7 @@ export function CategorySection({
     >
       <Atmosphere tone={forest ? "forest" : "cream"} />
       <div className="layout-split relative mx-auto grid w-full max-w-[90rem] gap-8 py-[clamp(2.5rem,7vh,6rem)] screen-gutter md:items-start md:gap-10 xl:gap-16 2xl:max-w-[110rem]">
-        <div className="[@media(min-width:768px)_and_(min-height:640px)]:sticky [@media(min-width:768px)_and_(min-height:640px)]:top-28">
+        <div className="[@media(min-width:768px)_and_(min-height:640px)]:sticky [@media(min-width:768px)_and_(min-height:640px)]:top-[calc(6.25rem+env(safe-area-inset-top))]">
           <p className="text-[0.7rem] tracking-[0.35em] uppercase text-terracotta">
             {category.scriptAccent ?? t.menu}
           </p>

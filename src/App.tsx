@@ -3,6 +3,7 @@ import { lazy, Suspense } from "react";
 import { I18nProvider } from "@/lib/i18n";
 import { readStoredLocale } from "@/lib/locale";
 import { MenuPage } from "@/pages/MenuPage";
+import { TableCardPage } from "@/pages/TableCardPage";
 
 const AdminApp = lazy(() => import("@/admin/AdminApp"));
 
@@ -22,6 +23,7 @@ export function App() {
   return (
     <Routes>
       <Route path="/" element={<Navigate to={`/${readStoredLocale()}`} replace />} />
+      <Route path="/print/table-card" element={<TableCardPage />} />
       <Route
         path="/admin/*"
         element={

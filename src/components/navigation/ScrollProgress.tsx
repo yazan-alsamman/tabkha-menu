@@ -14,10 +14,7 @@ export function ScrollProgress() {
   }, []);
 
   return (
-    <div
-      className="pointer-events-none fixed inset-x-0 top-0 z-rail h-[2px] bg-transparent"
-      aria-hidden
-    >
+    <div className="pointer-events-none h-[2px] bg-transparent" aria-hidden>
       <div
         className="h-full origin-left bg-terracotta rtl:origin-right"
         style={{ transform: `scaleX(${progress})` }}

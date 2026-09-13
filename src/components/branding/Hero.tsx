@@ -1,4 +1,3 @@
-import { useEffect } from "react";
 import { motion, useReducedMotion } from "motion/react";
 import { useI18n } from "@/lib/i18n";
 import { WordmarkAr, WordmarkLatin } from "./PetalMark";
@@ -6,29 +5,16 @@ import { ArchDivider } from "./ArchDivider";
 import { PetalMark3D } from "@/components/animations/PetalMark3D";
 import { LanguageSwitcher } from "@/components/navigation/LanguageSwitcher";
 import { TaaOrbit } from "./TaaOrbit";
+import { VegaCoreMark } from "./VegaCoreMark";
+import { InstagramIcon } from "./SocialIcons";
+import { INSTAGRAM_URL } from "@/lib/contact";
 
-const LANDING_MS = 3800;
-const LANDING_MS_REDUCED = 1200;
-
-export function Hero({
-  onContinue,
-  active,
-}: {
-  onContinue: () => void;
-  active: boolean;
-}) {
+export function Hero({ onContinue }: { onContinue: () => void }) {
   const { locale, t } = useI18n();
   const reduce = useReducedMotion();
 
-  useEffect(() => {
-    if (!active) return;
-    const delay = reduce ? LANDING_MS_REDUCED : LANDING_MS;
-    const id = window.setTimeout(onContinue, delay);
-    return () => window.clearTimeout(id);
-  }, [active, onContinue, reduce]);
-
   return (
-    <header className="relative isolate flex min-h-dvh min-h-svh flex-col items-center justify-center overflow-hidden bg-forest py-[clamp(4rem,12vh,7rem)] text-cream screen-gutter">
+    <header className="relative isolate flex min-h-dvh min-h-svh flex-col items-center justify-center overflow-hidden bg-forest pt-[clamp(4rem,12vh,7rem)] pb-[8.75rem] text-cream screen-gutter">
       <TaaOrbit />
       <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_22%,rgb(35_48_37_/_0.62)_100%)]" />
 
@@ -71,10 +57,24 @@ export function Hero({
       <button
         type="button"
         onClick={onContinue}
-        className="relative z-10 mt-[clamp(1.5rem,6vh,4rem)] min-h-11 text-[0.7rem] tracking-[0.35em] uppercase text-cream/70"
+        className="relative z-10 mt-[clamp(1.5rem,6vh,4rem)] min-h-12 rounded-full border border-cream/30 px-8 text-[0.7rem] tracking-[0.35em] uppercase text-cream"
       >
         {t.explore}
       </button>
+
+      <div className="absolute inset-x-0 bottom-0 z-10 flex flex-col items-center gap-3 pb-[max(1rem,env(safe-area-inset-bottom))] pt-6">
+        <a
+          href={INSTAGRAM_URL}
+          target="_blank"
+          rel="noreferrer"
+          className="grid size-11 place-items-center text-cream/70"
+          aria-label="Instagram"
+        >
+          <InstagramIcon />
+        </a>
+        <p className="text-[0.55rem] tracking-[0.28em] uppercase text-sage">{t.designedBy}</p>
+        <VegaCoreMark tone="cream" />
+      </div>
     </header>
   );
 }

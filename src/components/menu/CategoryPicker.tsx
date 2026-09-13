@@ -2,7 +2,6 @@ import { motion } from "motion/react";
 import { useI18n } from "@/lib/i18n";
 import { categoryImage } from "@/lib/images";
 import { PetalMark } from "@/components/branding/PetalMark";
-import { LanguageSwitcher } from "@/components/navigation/LanguageSwitcher";
 import type { CategoryWithItems } from "@/types/menu";
 
 export function CategoryPicker({
@@ -16,20 +15,6 @@ export function CategoryPicker({
 
   return (
     <div id="categories" className="min-h-dvh bg-cream text-forest">
-      <header
-        className="sticky top-0 z-rail border-b border-cream/10 bg-forest text-cream"
-        style={{ paddingTop: "env(safe-area-inset-top)" }}
-      >
-        <div className="flex items-center gap-3 py-3 screen-gutter">
-          <PetalMark className="size-8 shrink-0 text-cream" title="Tabkha" />
-          <div className="min-w-0 flex-1">
-            <p className="text-[0.62rem] tracking-[0.28em] uppercase text-terracotta">{t.menu}</p>
-            <h1 className="font-copy truncate text-lg leading-tight">{t.chooseCategory}</h1>
-          </div>
-          <LanguageSwitcher />
-        </div>
-      </header>
-
       {categories.length ? (
         <div className="mx-auto grid max-w-[90rem] grid-cols-2 gap-3 py-5 screen-gutter sm:grid-cols-3 lg:grid-cols-4">
           {categories.map((category, index) => {
