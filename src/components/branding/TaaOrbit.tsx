@@ -1,11 +1,8 @@
 import { motion, useReducedMotion } from "motion/react";
 import { TaaMark } from "./PetalMark";
 
-const LETTERS = 20;
-const RING = "95vh";
-
-const EDGE_MASK =
-  "linear-gradient(to right, #000 0%, #000 28%, transparent 38%, transparent 62%, #000 72%, #000 100%)";
+const LETTERS = 32;
+const RING = "min(68vh, 34rem)";
 
 function TaaRing({
   reverse,
@@ -33,7 +30,7 @@ function TaaRing({
               transform: "translate(-50%, -50%)",
             }}
           >
-            <TaaMark className="h-[clamp(1.9rem,5vw,2.9rem)] w-[clamp(1.35rem,3.5vw,2.1rem)]" />
+            <TaaMark className="h-[clamp(1.7rem,4.4vw,2.5rem)] w-[clamp(1.2rem,3.1vw,1.8rem)]" />
           </span>
         </span>
       ))}
@@ -41,22 +38,15 @@ function TaaRing({
   );
 }
 
-/** Identity ط as spinning half-circles, visible only on the left and right edges. */
+/** Identity ط spinning in the top-right and bottom-left corners. */
 export function TaaOrbit() {
   return (
-    <div
-      className="pointer-events-none absolute inset-0 overflow-hidden text-sage"
-      aria-hidden
-      style={{
-        maskImage: EDGE_MASK,
-        WebkitMaskImage: EDGE_MASK,
-      }}
-    >
-      <div className="absolute top-1/2 left-0 size-[95vh] -translate-x-1/2 -translate-y-1/2">
-        <TaaRing duration={36} />
+    <div className="pointer-events-none absolute inset-0 overflow-hidden text-sage" aria-hidden>
+      <div className="absolute top-0 right-0 size-[min(68vh,34rem)] translate-x-[46%] -translate-y-[46%]">
+        <TaaRing duration={32} />
       </div>
-      <div className="absolute top-1/2 right-0 size-[95vh] translate-x-1/2 -translate-y-1/2">
-        <TaaRing duration={42} reverse />
+      <div className="absolute bottom-0 left-0 size-[min(68vh,34rem)] -translate-x-[46%] translate-y-[46%]">
+        <TaaRing duration={38} reverse />
       </div>
     </div>
   );

@@ -2,7 +2,15 @@ import { useRef } from "react";
 import { motion, useReducedMotion, useScroll, useTransform } from "motion/react";
 import { resolveMenuImage } from "@/lib/images";
 
-export function CategoryPhoto({ slug, alt }: { slug: string; alt: string }) {
+export function CategoryPhoto({
+  slug,
+  alt,
+  fill,
+}: {
+  slug: string;
+  alt: string;
+  fill?: boolean;
+}) {
   const image = resolveMenuImage(slug);
   const ref = useRef<HTMLDivElement>(null);
   const reduce = useReducedMotion();
@@ -16,7 +24,7 @@ export function CategoryPhoto({ slug, alt }: { slug: string; alt: string }) {
   if (!image.src) return null;
 
   return (
-    <div ref={ref} className="relative overflow-hidden bg-forest/10" style={{ perspective: "800px" }}>
+    <div ref={ref} className={`relative overflow-hidden bg-forest/10 ${fill ? "h-full" : ""}`} style={{ perspective: "800px" }}>
       <div
         className="absolute inset-0 scale-110 blur-2xl"
         style={{ backgroundImage: `url(${image.placeholder})`, backgroundSize: "cover" }}
@@ -29,7 +37,7 @@ export function CategoryPhoto({ slug, alt }: { slug: string; alt: string }) {
         alt={alt}
         loading="lazy"
         decoding="async"
-        className="relative z-10 aspect-[4/3] h-auto w-full object-cover"
+        className={fill ? "relative z-10 h-full w-full object-cover" : "relative z-10 aspect-[4/3] h-auto w-full object-cover"}
         style={{ scale, y }}
       />
     </div>

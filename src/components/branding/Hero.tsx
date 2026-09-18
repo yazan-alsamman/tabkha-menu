@@ -5,16 +5,15 @@ import { ArchDivider } from "./ArchDivider";
 import { PetalMark3D } from "@/components/animations/PetalMark3D";
 import { LanguageSwitcher } from "@/components/navigation/LanguageSwitcher";
 import { TaaOrbit } from "./TaaOrbit";
-import { VegaCoreMark } from "./VegaCoreMark";
 import { InstagramIcon } from "./SocialIcons";
-import { INSTAGRAM_URL } from "@/lib/contact";
+import { INSTAGRAM_HANDLE, INSTAGRAM_URL } from "@/lib/contact";
 
 export function Hero({ onContinue }: { onContinue: () => void }) {
   const { locale, t } = useI18n();
   const reduce = useReducedMotion();
 
   return (
-    <header className="relative isolate flex min-h-dvh min-h-svh flex-col items-center justify-center overflow-hidden bg-forest pt-[clamp(4rem,12vh,7rem)] pb-[8.75rem] text-cream screen-gutter">
+    <header className="relative isolate flex min-h-dvh min-h-svh flex-col items-center justify-center overflow-hidden bg-forest pt-[clamp(4rem,12vh,7rem)] pb-[max(2rem,env(safe-area-inset-bottom))] text-cream screen-gutter">
       <TaaOrbit />
       <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_22%,rgb(35_48_37_/_0.62)_100%)]" />
 
@@ -57,24 +56,26 @@ export function Hero({ onContinue }: { onContinue: () => void }) {
       <button
         type="button"
         onClick={onContinue}
-        className="relative z-10 mt-[clamp(1.5rem,6vh,4rem)] min-h-12 rounded-full border border-cream/30 px-8 text-[0.7rem] tracking-[0.35em] uppercase text-cream"
+        className={`relative z-10 mt-[clamp(1.25rem,4vh,2.75rem)] min-h-12 rounded-full border border-cream/30 px-8 text-cream ${
+          locale === "ar" ? "font-copy text-[1.1rem] tracking-normal" : "text-[0.7rem] tracking-[0.35em] uppercase"
+        }`}
       >
         {t.explore}
       </button>
 
-      <div className="absolute inset-x-0 bottom-0 z-10 flex flex-col items-center gap-3 pb-[max(1rem,env(safe-area-inset-bottom))] pt-6">
-        <a
-          href={INSTAGRAM_URL}
-          target="_blank"
-          rel="noreferrer"
-          className="grid size-11 place-items-center text-cream/70"
-          aria-label="Instagram"
-        >
-          <InstagramIcon />
-        </a>
-        <p className="text-[0.55rem] tracking-[0.28em] uppercase text-sage">{t.designedBy}</p>
-        <VegaCoreMark tone="cream" />
-      </div>
+      <a
+        href={INSTAGRAM_URL}
+        target="_blank"
+        rel="noreferrer"
+        dir="ltr"
+        className="relative z-10 mt-5 flex min-h-12 items-center gap-3 text-cream/90"
+        aria-label={`Instagram @${INSTAGRAM_HANDLE}`}
+      >
+        <InstagramIcon className="size-8" />
+        <span dir="ltr" className="text-[1.05rem] tracking-normal">
+          @{INSTAGRAM_HANDLE}
+        </span>
+      </a>
     </header>
   );
 }

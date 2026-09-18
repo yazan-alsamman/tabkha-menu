@@ -82,11 +82,11 @@ export function MenuItemSheet({
           }}
         >
           <div className="mx-auto mt-3 h-1 w-12 rounded-full bg-forest/20 sm:hidden" />
-          <div className="max-h-44 overflow-hidden sm:max-h-56">
+          <div className="h-[min(48vh,26rem)] overflow-hidden sm:h-[min(52vh,28rem)]">
             {item.image ? (
-              <img src={item.image} alt="" className="aspect-[4/3] w-full object-cover" />
+              <img src={item.image} alt="" className="h-full w-full object-cover" />
             ) : (
-              <CategoryPhoto slug={category.image} alt="" />
+              <CategoryPhoto slug={category.image} alt="" fill />
             )}
           </div>
           <div className="screen-gutter py-6">
