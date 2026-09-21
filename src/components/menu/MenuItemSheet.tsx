@@ -48,7 +48,7 @@ export function MenuItemSheet({
   const overlay =
     item && category ? (
       <motion.div
-        className="fixed inset-0 z-[70] flex items-end justify-center p-0 sm:items-center sm:p-6"
+        className="fixed inset-0 z-[70] flex items-end justify-center px-0 pb-0 pt-[calc(6.15rem+env(safe-area-inset-top))] sm:items-center sm:px-6 sm:pb-6"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         exit={{ opacity: 0 }}
@@ -75,7 +75,7 @@ export function MenuItemSheet({
           animate={{ y: 0, opacity: 1, scale: 1, rotateX: 0 }}
           exit={{ y: 40, opacity: 0, scale: 0.98 }}
           transition={{ duration: 0.42, ease: [0.16, 1, 0.3, 1] }}
-          className="relative max-h-[90dvh] w-full overflow-auto bg-cream text-forest outline-none sm:max-w-lg"
+          className="relative max-h-full w-full overflow-auto bg-cream text-forest outline-none sm:max-w-lg"
           style={{
             paddingBottom: "max(1.5rem, env(safe-area-inset-bottom))",
             transformPerspective: 900,
