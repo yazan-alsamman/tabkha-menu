@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { AnimatePresence, motion } from "motion/react";
 import { useI18n } from "@/lib/i18n";
-import { categoryImage } from "@/lib/images";
+import { resolveMenuImage } from "@/lib/images";
 import { PetalMark } from "@/components/branding/PetalMark";
 import { LanguageSwitcher } from "./LanguageSwitcher";
 import type { CategoryWithItems } from "@/types/menu";
@@ -150,7 +150,7 @@ export function CategoryNav({
               </div>
               <div className="grid grid-cols-2 gap-2 px-3 sm:grid-cols-3">
                 {categories.map((category) => {
-                  const image = categoryImage(category.image);
+                  const image = resolveMenuImage(category.image);
                   const selected = category.id === activeId;
                   return (
                     <button
@@ -162,11 +162,16 @@ export function CategoryNav({
                       {image.src ? (
                         <img
                           src={image.src}
+                          srcSet={image.srcSet || undefined}
                           alt=""
                           className="pointer-events-none aspect-[4/3] w-full object-cover"
                           loading="lazy"
                         />
-                      ) : null}
+                      ) : (
+                        <div className="grid aspect-[4/3] place-items-center bg-forest/8">
+                          <PetalMark className="size-8 text-forest/25" />
+                        </div>
+                      )}
                       <span className="font-copy block px-2.5 pt-2 text-[0.95rem] leading-snug">
                         {locale === "ar" ? category.nameAr : category.nameEn}
                       </span>

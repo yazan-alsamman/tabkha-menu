@@ -129,6 +129,10 @@ export const adminCopy = {
     confirmBulkDelete: "حذف الأطباق المحددة؟ لا يمكن التراجع.",
     liveNote: "الضيوف يرون المنشور والمتوفر فقط.",
     quickAdd: "إضافة سريعة",
+    dropImage: "اسحب الصورة هنا أو اضغط للرفع",
+    publishToShow: "احفظ ثم انشر حتى تظهر الصورة للضيوف.",
+    categoryCoverHint: "تظهر على بطاقات الأقسام وفي رأس القسم.",
+    dishCoverHint: "تظهر بجانب اسم الصنف في القائمة. إن تُركت فارغة يُستخدم غلاف القسم.",
   },
   en: {
     brand: "Tabkha and More",
@@ -260,6 +264,10 @@ export const adminCopy = {
     confirmBulkDelete: "Delete the selected dishes? This cannot be undone.",
     liveNote: "Guests see published, available dishes only.",
     quickAdd: "Quick add",
+    dropImage: "Drop a photo here, or tap to upload",
+    publishToShow: "Save, then publish, so guests see this photo.",
+    categoryCoverHint: "Shown on category cards and at the top of the section.",
+    dishCoverHint: "Shown beside the dish on the menu. If empty, the category cover is used.",
   },
 } as const;
 

@@ -149,6 +149,17 @@ describe("public menu assembly", () => {
     expect(live.categories[0].items[0].nameEn).toBeNull();
   });
 
+  it("keeps uploaded cover urls on live categories and dishes", () => {
+    const live = assembleMenu({
+      restaurant,
+      categories: [{ ...categories[0], image: "https://cdn.example/cover.webp" }],
+      items: [{ ...items[0], image: "https://cdn.example/dish.webp", available: true, published: true, active: true }],
+      mode: "live",
+    });
+    expect(live.categories[0].image).toBe("https://cdn.example/cover.webp");
+    expect(live.categories[0].items[0].image).toBe("https://cdn.example/dish.webp");
+  });
+
   it("shows drafts and unavailable dishes in preview", () => {
     const preview = assembleMenu({ restaurant, categories, items, mode: "preview" });
     expect(preview.categories).toHaveLength(2);

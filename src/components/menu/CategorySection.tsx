@@ -42,6 +42,7 @@ export function CategorySection({
               <MenuItemCard
                 key={item.id}
                 item={item}
+                categoryImage={category.image}
                 surface={category.surface}
                 index={index}
                 onOpen={() => onOpen(item)}

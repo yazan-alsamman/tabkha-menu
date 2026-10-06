@@ -66,6 +66,7 @@ export function CategoryEditorPage() {
     onSuccess: (row, published) => {
       setToast(published ? t.published : t.saved);
       void client.invalidateQueries({ queryKey: ["admin-categories"] });
+      void client.invalidateQueries({ queryKey: ["admin-category"] });
       if (isNew) navigate(`/admin/categories/${row.id}`, { replace: true });
     },
     onError: (err) => setError(err instanceof ApiError ? err.message : t.networkError),
@@ -103,7 +104,7 @@ export function CategoryEditorPage() {
         <Field label={t.descriptionEn} hint={t.optional}>
           <Textarea value={descriptionEn} onChange={(e) => setDescriptionEn(e.target.value)} dir="ltr" />
         </Field>
-        <Field label={t.image}>
+        <Field label={t.image} hint={t.categoryCoverHint}>
           <ImageField kind="category" value={image} onChange={setImage} />
         </Field>
         <Field label={t.surface}>

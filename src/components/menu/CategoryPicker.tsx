@@ -1,6 +1,6 @@
 import { motion } from "motion/react";
 import { useI18n } from "@/lib/i18n";
-import { categoryImage } from "@/lib/images";
+import { resolveMenuImage } from "@/lib/images";
 import { PetalMark } from "@/components/branding/PetalMark";
 import type { CategoryWithItems } from "@/types/menu";
 
@@ -18,7 +18,7 @@ export function CategoryPicker({
       {categories.length ? (
         <div className="mx-auto grid max-w-[90rem] grid-cols-2 gap-3 py-5 screen-gutter sm:grid-cols-3 lg:grid-cols-4">
           {categories.map((category, index) => {
-            const image = categoryImage(category.image);
+            const image = resolveMenuImage(category.image);
             const primary = locale === "ar" ? category.nameAr : category.nameEn;
             const secondary = locale === "ar" ? category.nameEn : category.nameAr;
             return (

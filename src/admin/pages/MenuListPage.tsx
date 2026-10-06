@@ -11,6 +11,7 @@ import { EmptyState } from "../components/EmptyState";
 import { StatusPill } from "../components/StatusPill";
 import { ConfirmDialog } from "../components/ConfirmDialog";
 import { Input, Select } from "../components/Field";
+import { Thumb } from "../components/Thumb";
 import type { AdminItem } from "../types";
 
 function Row({
@@ -36,7 +37,7 @@ function Row({
     <div
       ref={setNodeRef}
       style={{ transform: CSS.Transform.toString(transform), transition }}
-      className="grid grid-cols-[auto_auto_minmax(0,1fr)_auto] items-center gap-3 border-b border-forest/10 py-3 md:grid-cols-[auto_auto_4.5rem_minmax(0,1.4fr)_minmax(0,1fr)_auto_auto_auto]"
+      className="grid grid-cols-[auto_auto_3.5rem_minmax(0,1fr)_auto] items-center gap-3 border-b border-forest/10 py-3 md:grid-cols-[auto_auto_4.5rem_minmax(0,1.4fr)_minmax(0,1fr)_auto_auto_auto]"
     >
       <input type="checkbox" checked={selected} onChange={onToggle} className="size-4 accent-forest" />
       <button
@@ -47,11 +48,7 @@ function Row({
       >
         ::
       </button>
-      {item.image ? (
-        <img src={item.image} alt="" className="hidden size-14 object-cover md:block" />
-      ) : (
-        <span className="hidden size-14 bg-forest/5 md:block" />
-      )}
+      <Thumb src={item.image} className="size-14" />
       <button type="button" className="min-w-0 text-start" onClick={() => navigate(`/admin/menu/${item.id}/edit`)}>
         <p className="font-copy truncate">{item.nameAr}</p>
         <p className="truncate text-sm text-forest/45">{item.nameEn ?? t.missingEnglish}</p>
@@ -65,8 +62,13 @@ function Row({
         <StatusPill tone={item.published ? "live" : "draft"}>{item.published ? t.published : t.draft}</StatusPill>
         <StatusPill tone={item.available ? "live" : "warn"}>{item.available ? t.available : t.unavailable}</StatusPill>
       </div>
-      <div className="hidden text-end md:block">
+      <div className="hidden items-center justify-end gap-2 md:flex">
         {item.flags.needsReview ? <StatusPill tone="warn">{t.needsReview}</StatusPill> : null}
+        <Link to={`/admin/menu/${item.id}/edit`}>
+          <Button variant="ghost" className="min-h-9 px-3 text-[0.65rem]">
+            {t.edit}
+          </Button>
+        </Link>
       </div>
     </div>
   );

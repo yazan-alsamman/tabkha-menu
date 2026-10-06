@@ -1,17 +1,20 @@
 import { motion, useMotionValue, useReducedMotion, useSpring, useTransform } from "motion/react";
 import { useI18n } from "@/lib/i18n";
 import { itemName } from "@/lib/format";
+import { coverImage } from "@/lib/images";
 import { Price } from "./Price";
 import type { MenuItemSeed, Surface } from "@/types/menu";
 import type { PointerEvent } from "react";
 
 export function MenuItemCard({
   item,
+  categoryImage,
   surface,
   index,
   onOpen,
 }: {
   item: MenuItemSeed;
+  categoryImage?: string | null;
   surface: Surface;
   index: number;
   onOpen: () => void;
@@ -23,7 +26,7 @@ export function MenuItemCard({
   const muted = surface === "forest" ? "text-cream/55" : "text-forest/50";
   const ink = surface === "forest" ? "text-cream" : "text-forest";
   const line = surface === "forest" ? "border-cream/12" : "border-forest/12";
-  const photo = item.image;
+  const photo = coverImage(item.image, categoryImage);
 
   const px = useMotionValue(0);
   const py = useMotionValue(0);
@@ -53,14 +56,15 @@ export function MenuItemCard({
       style={{ rotateX: reduce ? 0 : rotateX, rotateY: reduce ? 0 : rotateY, transformPerspective: 800 }}
       whileTap={{ scale: 0.98 }}
       className={`group grid min-h-12 w-full items-baseline gap-x-4 gap-y-1 border-b ${line} py-4 text-start will-change-transform ${
-        photo ? "grid-cols-[3.25rem_1fr_auto]" : "grid-cols-[1fr_auto]"
+        photo.src ? "grid-cols-[4.75rem_1fr_auto]" : "grid-cols-[1fr_auto]"
       }`}
     >
-      {photo ? (
+      {photo.src ? (
         <img
-          src={photo}
+          src={photo.src}
+          srcSet={photo.srcSet || undefined}
           alt=""
-          className="col-start-1 row-span-3 mt-1 aspect-square w-full object-cover"
+          className="col-start-1 row-span-3 mt-0.5 aspect-square w-full object-cover"
           loading="lazy"
           decoding="async"
         />
@@ -77,12 +81,12 @@ export function MenuItemCard({
         <span className={`text-xs ${muted}`}>{t.suggestedEn}</span>
       ) : null}
       {item.descriptionAr || item.descriptionEn ? (
-        <span className={`${photo ? "col-span-2 col-start-2" : "col-span-2"} text-sm ${muted}`}>
+        <span className={`${photo.src ? "col-span-2 col-start-2" : "col-span-2"} text-sm ${muted}`}>
           {locale === "ar" ? item.descriptionAr : item.descriptionEn}
         </span>
       ) : null}
       {item.portionNote ? (
-        <span className={`${photo ? "col-span-2 col-start-2" : "col-span-2"} text-xs ${muted}`}>
+        <span className={`${photo.src ? "col-span-2 col-start-2" : "col-span-2"} text-xs ${muted}`}>
           {item.portionNote}
         </span>
       ) : null}

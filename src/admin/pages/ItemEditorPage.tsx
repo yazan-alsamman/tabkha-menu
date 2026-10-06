@@ -94,6 +94,7 @@ export function ItemEditorPage() {
     onSuccess: (row, published) => {
       setToast(published ? t.published : t.saved);
       void client.invalidateQueries({ queryKey: ["admin-items"] });
+      void client.invalidateQueries({ queryKey: ["admin-item"] });
       void client.invalidateQueries({ queryKey: ["admin-overview"] });
       if (isNew) navigate(`/admin/menu/${row.id}/edit`, { replace: true });
     },
@@ -161,7 +162,7 @@ export function ItemEditorPage() {
         <Field label={`${t.price} (AED)`}>
           <Input type="number" min="0" step="0.5" value={price} onChange={(e) => setPrice(e.target.value)} />
         </Field>
-        <Field label={t.image} hint={t.optional}>
+        <Field label={t.image} hint={t.dishCoverHint}>
           <ImageField kind="dish" value={image} onChange={setImage} />
         </Field>
         <Field label={t.portionNote} hint={t.optional}>

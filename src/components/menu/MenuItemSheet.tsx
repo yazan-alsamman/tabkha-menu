@@ -5,6 +5,7 @@ import { useI18n } from "@/lib/i18n";
 import { itemName } from "@/lib/format";
 import { Price } from "./Price";
 import { PetalMark } from "@/components/branding/PetalMark";
+import { resolveMenuImage } from "@/lib/images";
 import { CategoryPhoto } from "./CategoryPhoto";
 import type { CategoryWithItems, MenuItemSeed } from "@/types/menu";
 
@@ -45,6 +46,8 @@ export function MenuItemSheet({
     };
   }, [item, onClose]);
 
+  const dishPhoto = resolveMenuImage(item?.image);
+
   const overlay =
     item && category ? (
       <motion.div
@@ -83,8 +86,8 @@ export function MenuItemSheet({
         >
           <div className="mx-auto mt-3 h-1 w-12 rounded-full bg-forest/20 sm:hidden" />
           <div className="h-[min(48vh,26rem)] overflow-hidden sm:h-[min(52vh,28rem)]">
-            {item.image ? (
-              <img src={item.image} alt="" className="h-full w-full object-cover" />
+            {dishPhoto.src ? (
+              <img src={dishPhoto.src} alt="" className="h-full w-full object-cover" />
             ) : (
               <CategoryPhoto slug={category.image} alt="" fill />
             )}

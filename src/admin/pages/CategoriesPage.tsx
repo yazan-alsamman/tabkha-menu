@@ -8,6 +8,7 @@ import { useAdminI18n } from "../i18n";
 import { Button } from "../components/Button";
 import { EmptyState } from "../components/EmptyState";
 import { StatusPill } from "../components/StatusPill";
+import { Thumb } from "../components/Thumb";
 import type { AdminCategory } from "../types";
 
 function SortableRow({ category, locale }: { category: AdminCategory; locale: "ar" | "en" }) {
@@ -17,11 +18,12 @@ function SortableRow({ category, locale }: { category: AdminCategory; locale: "a
     <div
       ref={setNodeRef}
       style={{ transform: CSS.Transform.toString(transform), transition }}
-      className="grid grid-cols-[auto_1fr_auto] items-center gap-3 border-b border-forest/10 py-3"
+      className="grid grid-cols-[auto_3.5rem_1fr_auto] items-center gap-3 border-b border-forest/10 py-3"
     >
       <button type="button" className="min-h-11 px-2 text-sage" aria-label={t.orderHint} {...attributes} {...listeners}>
         ::
       </button>
+      <Thumb src={category.image} className="size-14" />
       <Link to={`/admin/categories/${category.id}`} className="min-w-0">
         <p className="font-copy truncate">{locale === "ar" ? category.nameAr : category.nameEn}</p>
         <p className="truncate text-sm text-forest/45">{locale === "ar" ? category.nameEn : category.nameAr}</p>
@@ -29,6 +31,11 @@ function SortableRow({ category, locale }: { category: AdminCategory; locale: "a
       <div className="flex flex-wrap items-center justify-end gap-2">
         <StatusPill tone={category.published ? "live" : "draft"}>{category.published ? t.published : t.draft}</StatusPill>
         <span className="text-xs text-sage">{category.itemCount ?? 0}</span>
+        <Link to={`/admin/categories/${category.id}`}>
+          <Button variant="ghost" className="min-h-9 px-3 text-[0.65rem]">
+            {t.edit}
+          </Button>
+        </Link>
       </div>
     </div>
   );

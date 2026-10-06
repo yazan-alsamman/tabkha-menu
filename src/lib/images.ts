@@ -62,3 +62,9 @@ export function resolveMenuImage(ref: string | null | undefined) {
   }
   return categoryImage(ref);
 }
+
+export function coverImage(itemImage?: string | null, categoryImageRef?: string | null) {
+  const item = resolveMenuImage(itemImage);
+  if (item.src) return item;
+  return resolveMenuImage(categoryImageRef);
+}
