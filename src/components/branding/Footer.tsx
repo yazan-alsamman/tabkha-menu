@@ -1,6 +1,6 @@
 import { PetalMark } from "./PetalMark";
 import { VegaCoreMark } from "./VegaCoreMark";
-import { InstagramIcon, PhoneIcon, PinIcon } from "./SocialIcons";
+import { InstagramIcon, PinIcon, WhatsAppIcon } from "./SocialIcons";
 import { useI18n } from "@/lib/i18n";
 import {
   ADDRESS_AR,
@@ -9,7 +9,7 @@ import {
   INSTAGRAM_URL,
   MAPS_URL,
   PHONE_DISPLAY,
-  PHONE_E164,
+  WHATSAPP_URL,
 } from "@/lib/contact";
 
 export function Footer() {
@@ -38,8 +38,15 @@ export function Footer() {
             </a>
           </li>
           <li>
-            <a dir="ltr" href={`tel:${PHONE_E164}`} className="inline-flex min-h-11 items-center justify-center gap-2.5">
-              <PhoneIcon className="size-4 shrink-0 text-terracotta" />
+            <a
+              dir="ltr"
+              href={WHATSAPP_URL}
+              target="_blank"
+              rel="noreferrer"
+              className="inline-flex min-h-11 items-center justify-center gap-2.5"
+              aria-label={`WhatsApp ${PHONE_DISPLAY}`}
+            >
+              <WhatsAppIcon className="size-4 shrink-0 text-terracotta" />
               <span>{PHONE_DISPLAY}</span>
             </a>
           </li>

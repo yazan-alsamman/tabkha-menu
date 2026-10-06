@@ -3,6 +3,7 @@ export const INSTAGRAM_HANDLE = "tabkha_n_more";
 
 export const PHONE_E164 = "+971527791340";
 export const PHONE_DISPLAY = "+971 52 779 1340";
+export const WHATSAPP_URL = `https://wa.me/${PHONE_E164.replace(/\D/g, "")}`;
 
 export const ADDRESS_EN = "Dubai, Jumeirah 16C Street";
 export const ADDRESS_AR = "دبي، الجميرا، شارع 16C";
